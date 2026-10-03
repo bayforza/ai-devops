@@ -17,7 +17,16 @@ OrbStack (veya Docker Desktop), kind, kubectl, helm, curl:
     make fault-cpu      # recommendationservice CPU kisitlama
     make reset          # manifesti yeniden uygular, hepsini duzeltir
 
-## Agent (bu kitte YOK, ayri adim)
-HolmesGPT/K8sGPT'yi kurup kubeconfig'e (context: kind-devops-demo) salt okunur
-yetkiyle baglayin. Kurulum adimlari icin projenin guncel dokumanina bakin.
+## Agent (Cursor SDK)
+
+Yerel Node agent: [`agent-ts/`](./agent-ts/) — `@cursor/sdk`, salt okunur `kubectl_read` + opsiyonel `prom_query`.
+
+    cd agent-ts && npm i
+    export CURSOR_API_KEY=...          # Dashboard → API Keys
+    make fault-oom T=a && sleep 60     # kök dizinden
+    cd agent-ts && npm start
+
+Müşteri demosunda dosya okumayı da kapatmak için `AGENT_STRICT_TOOLS=1 npm start`.
+Ayrıntılar: [`agent-ts/README.md`](./agent-ts/README.md).
+
 # ai-devops
